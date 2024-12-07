@@ -1,1 +1,1 @@
-https://Sharik3k.github.io/coursework
+https://Sharik3k.github.io/coursework/index.html
