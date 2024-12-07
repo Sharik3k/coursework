@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтернет-магазин Razetka</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Razetka</h1>
+        <input type="text" id="search" placeholder="Пошук товарів...">
+    </header>
+    <main>
+        <aside>
+            <h2>Фільтр</h2>
+            <label><input type="checkbox" value="Samsung"> Samsung</label><br>
+            <label><input type="checkbox" value="Apple"> Apple</label><br>
+            <label><input type="checkbox" value="Xiaomi"> Xiaomi</label>
+        </aside>
+        <section id="products"></section>
+    </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">Деталі товару</h3>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img id="modal-image" src="" alt="Product Image">
+                    <p id="modal-description"></p>
+                </div>
+                <div class="modal-right">
+                    <label for="color-select">Виберіть колір:</label>
+                    <select id="color-select">
+                        <option value="black">Чорний</option>
+                        <option value="white">Білий</option>
+                        <option value="blue">Синій</option>
+                    </select>
+                    <br>
+                    <label for="memory-select">Виберіть пам'ять:</label>
+                    <select id="memory-select">
+                        <option value="64GB">64GB</option>
+                        <option value="128GB">128GB</option>
+                        <option value="256GB">256GB</option>
+                    </select>
+                    <br><br>
+                    <button id="confirm-buy">Підтвердити покупку</button>
+                    <button id="add-to-list">Додати в кошик</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
