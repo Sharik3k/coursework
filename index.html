@@ -6,9 +6,15 @@
     <title>Інтернет-магазин Razetka</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
+        <div id="cart-icon">
+            🛒 <span id="cart-count">0</span>
+        </div>
         <h1>Razetka</h1>
         <input type="text" id="search" placeholder="Пошук товарів...">
     </header>
@@ -36,6 +42,7 @@
                         <option value="black">Чорний</option>
                         <option value="white">Білий</option>
                         <option value="blue">Синій</option>
+                        <option value="purple">фіолетовий</option>
                     </select>
                     <br>
                     <label for="memory-select">Виберіть пам'ять:</label>
@@ -46,9 +53,17 @@
                     </select>
                     <br><br>
                     <button id="confirm-buy">Підтвердити покупку</button>
-                    <button id="add-to-list">Додати в кошик</button>
+                    <button id="add-to-cart">Додати в кошик</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-cart">&times;</span>
+            <h3>Ваш кошик</h3>
+            <ul id="cart-items"></ul>
+            <button id="checkout">Оформити замовлення</button>
         </div>
     </div>
 </body>
