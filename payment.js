@@ -7,7 +7,6 @@ price: "1312313"
         event.preventDefault();
         alert(`Оплата ${paymentData.name} на суму ${paymentData.price} грн успішно виконана!`);
         localStorage.removeItem("paymentData");
-        window.location.href = "index.html";
-        return;
+        window.location.href = "index.html"
     });
 });
