@@ -129,13 +129,6 @@ function openModal(product) {
         modalImage.src = product.images[selectedColor];
     };
 
-    confirmBuyButton.onclick = () => {
-        alert(`Ви придбали ${product.name} за ${currentPrice} грн`);
-        cart.push({ ...product, selectedMemory: memorySelect.value, selectedColor: colorSelect.value, finalPrice: currentPrice });
-        updateCart();
-        closeModalFunction();
-    };
-
     addToCartButton.onclick = () => {
         cart.push({ ...product, selectedMemory: memorySelect.value, selectedColor: colorSelect.value, finalPrice: currentPrice });
         updateCart();
