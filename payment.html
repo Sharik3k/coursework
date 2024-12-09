@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Оплата</h1>
+    </header>
+    <main>
+        <form id="payment-form">
+            <label for="card-number">Номер картки:</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+
+            <label for="card-expiry">Термін дії (MM/YY):</label>
+            <input type="text" id="card-expiry" placeholder="MM/YY" required>
+
+            <label for="card-cvv">CVV:</label>
+            <input type="text" id="card-cvv" placeholder="123" required>
+
+            <label for="cardholder-name">Ім'я на картці:</label>
+            <input type="text" id="cardholder-name" placeholder="Ваше ім'я" required>
+
+            <button type="submit">Оплатити</button>
+        </form>
+    </main>
+
+    <script src="payment.js"></script>
+</body>
+</html>

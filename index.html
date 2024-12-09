@@ -6,9 +6,6 @@
     <title>Інтернет-магазин Razetka</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -18,6 +15,14 @@
         <h1>Razetka</h1>
         <input type="text" id="search" placeholder="Пошук товарів...">
     </header>
+
+    <div id="slider">
+        <img src="https://content1.rozetka.com.ua/banner_main/image_ua/original/495038234.jpg" alt="Слайдер 1">
+        <img src="https://content2.rozetka.com.ua/banner_main/image_ua/original/495019687.jpg" alt="Слайдер 2">
+        <img src="https://content.rozetka.com.ua/banner_main/image_ua/original/495311337.jpg" alt="Слайдер 3">
+    </div>
+    
+
     <main>
         <aside>
             <h2>Фільтр</h2>
@@ -27,6 +32,7 @@
         </aside>
         <section id="products"></section>
     </main>
+
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -52,19 +58,25 @@
                         <option value="256GB">256GB</option>
                     </select>
                     <br><br>
-                    <button id="confirm-buy">Підтвердити покупку</button>
+                    <a href="payment.html">
+                    <button id="confirm-buy">Підтвердити покупку </button>
+                </a>
                     <button id="add-to-cart">Додати в кошик</button>
                 </div>
             </div>
         </div>
     </div>
+    
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-cart">&times;</span>
             <h3>Ваш кошик</h3>
             <ul id="cart-items"></ul>
+            <a href="payment.html">
             <button id="checkout">Оформити замовлення</button>
+        </a>
         </div>
     </div>
+
 </body>
 </html>

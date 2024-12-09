@@ -1,4 +1,29 @@
-//інформація про товар
+// Слайдер
+const images = document.querySelectorAll('#slider img');
+let currentSlide = 0;
+setInterval(() => {
+    images[currentSlide].style.display = 'none';
+    currentSlide = (currentSlide + 1) % images.length;
+    images[currentSlide].style.display = 'block';
+}, 3000);
+
+const productsContainer = document.getElementById("products");
+const modal = document.getElementById("modal");
+const modalImage = document.getElementById("modal-image");
+const modalDescription = document.getElementById("modal-description");
+const colorSelect = document.getElementById("color-select");
+const memorySelect = document.getElementById("memory-select");
+const confirmBuyButton = document.getElementById("confirm-buy");
+const closeModal = document.querySelector(".close");
+const cart = [];
+const cartIcon = document.getElementById("cart-icon");
+const cartCount = document.getElementById("cart-count");
+const cartModal = document.getElementById("cart-modal");
+const closeCartModal = document.getElementById("close-cart");
+const cartItemsContainer = document.getElementById("cart-items");
+const addToCartButton = document.getElementById("add-to-cart");
+const checkoutButton = document.getElementById("checkout");
+
 const products = [
     {
         id: 1,
@@ -9,7 +34,7 @@ const products = [
             black: "https://content.rozetka.com.ua/goods/images/big/417139066.jpg",
             white: "https://content.rozetka.com.ua/goods/images/big/417135781.jpg",
             blue: "https://content.rozetka.com.ua/goods/images/big/417133239.jpg",
-            purple: "https://content2.rozetka.com.ua/goods/images/big/417137667.jpg "
+            purple: "https://content2.rozetka.com.ua/goods/images/big/417137667.jpg"
         },
         memoryOptions: {
             "64GB": 0,
@@ -68,17 +93,7 @@ const products = [
             "256GB": 14000,
         }
     }
-
 ];
-
-const productsContainer = document.getElementById("products");
-const modal = document.getElementById("modal");
-const modalImage = document.getElementById("modal-image");
-const modalDescription = document.getElementById("modal-description");
-const colorSelect = document.getElementById("color-select");
-const memorySelect = document.getElementById("memory-select");
-const confirmBuyButton = document.getElementById("confirm-buy");
-const closeModal = document.querySelector(".close");
 
 // Відображення товарів
 function renderProducts(products) {
@@ -115,87 +130,50 @@ function openModal(product) {
     };
 
     confirmBuyButton.onclick = () => {
-        const selectedColor = colorSelect.value;
-        const selectedMemory = memorySelect.value;
-        alert(`Ви купили ${product.name} у кольорі ${selectedColor} з пам'яттю ${selectedMemory} за ${currentPrice} грн`);
-        modal.style.display = "none";
+        alert(`Ви придбали ${product.name} за ${currentPrice} грн`);
+        cart.push({ ...product, selectedMemory: memorySelect.value, selectedColor: colorSelect.value, finalPrice: currentPrice });
+        updateCart();
+        closeModalFunction();
+    };
+
+    addToCartButton.onclick = () => {
+        cart.push({ ...product, selectedMemory: memorySelect.value, selectedColor: colorSelect.value, finalPrice: currentPrice });
+        updateCart();
+        closeModalFunction();
     };
 
     modal.style.display = "block";
 }
 
-// Закриття модального вікна
-closeModal.onclick = () => modal.style.display = "none";
-window.onclick = (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-};
-const cart = [];
-const cartIcon = document.getElementById("cart-icon");
-const cartCount = document.getElementById("cart-count");
-const cartModal = document.getElementById("cart-modal");
-const closeCartModal = document.getElementById("close-cart");
-const cartItemsContainer = document.getElementById("cart-items");
-const addToCartButton = document.getElementById("add-to-cart");
-const checkoutButton = document.getElementById("checkout");
-
-// Відкриття модального вікна кошика
-cartIcon.onclick = () => {
-    renderCart();
-    cartModal.style.display = "block";
-};
-
-// Закриття модального вікна кошика
-closeCartModal.onclick = () => cartModal.style.display = "none";
-
-// Додавання товару до кошика
-function addToCart(product, selectedColor, selectedMemory, finalPrice) {
-    cart.push({ product, selectedColor, selectedMemory, finalPrice });
+// Оновлення кошика
+function updateCart() {
     cartCount.textContent = cart.length;
-    alert(`${product.name} додано до кошика`);
-}
-
-// Рендеринг кошика
-function renderCart() {
     cartItemsContainer.innerHTML = "";
-    cart.forEach((item, index) => {
+    cart.forEach(item => {
         const cartItem = document.createElement("li");
-        cartItem.textContent = `${item.product.name}, Колір: ${item.selectedColor}, Пам'ять: ${item.selectedMemory}, Ціна: ${item.finalPrice} грн`;
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Видалити";
-        removeButton.onclick = () => {
-            cart.splice(index, 1);
-            renderCart();
-            cartCount.textContent = cart.length;
-        };
-        cartItem.appendChild(removeButton);
+        cartItem.textContent = `${item.name} (${item.selectedMemory}, ${item.selectedColor}) - ${item.finalPrice} грн`;
         cartItemsContainer.appendChild(cartItem);
     });
 }
 
-// Обробка оформлення замовлення
-checkoutButton.onclick = () => {
-    if (cart.length === 0) {
-        alert("Ваш кошик порожній!");
-    } else {
-        alert("Ваше замовлення оформлено!");
-        cart.length = 0;
-        renderCart();
-        cartCount.textContent = 0;
-        cartModal.style.display = "none";
-    }
-};
-
-// Інтеграція з модальним вікном товару
-addToCartButton.onclick = () => {
-    const selectedColor = colorSelect.value;
-    const selectedMemory = memorySelect.value;
-    const finalPrice = parseInt(modalDescription.textContent.match(/Ціна: (\d+)/)[1]);
-    addToCart(products.find(p => p.name === modalDescription.textContent.match(/Назва: (.+)/)[1]), selectedColor, selectedMemory, finalPrice);
+// Закриття модального вікна
+closeModal.onclick = closeModalFunction;
+function closeModalFunction() {
     modal.style.display = "none";
+}
+
+closeCartModal.onclick = () => {
+    cartModal.style.display = "none";
 };
 
+// Відкриття кошика
+cartIcon.addEventListener("click", () => {
+    cartModal.style.display = "block";
+});
 
-// Ініціалізація
+// Оформлення замовлення
+checkoutButton.addEventListener("click", () => {
+    window.location.href = "payment.html";
+});
+
 renderProducts(products);
